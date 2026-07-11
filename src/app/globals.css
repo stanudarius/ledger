@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Light Mode Palette */
+  --color-paper:        #F3EEE2;
+  --color-paper-alt:    #ECE5D4;
+  --color-ink:          #1A1A1A;
+  --color-ink-muted:    #6B6558;
+  --color-rule:         #1A1A1A;
+  --color-rule-dashed:  #C9C2AE;
+  --color-negative:     #C0392B;
+  --color-positive:     #2E7D46;
+  --color-accent-blue:  #4C6FE7;
+  --color-accent-purple:#8B5CF6;
+  --color-accent-orange:#E08E45;
+
+  /* Semantic Aliases */
+  --color-background:         var(--color-paper);
+  --color-foreground:         var(--color-ink);
+  --font-sans:                var(--font-inter);
+  --font-serif:               var(--font-fraunces);
+
+  --color-card:               var(--color-paper-alt);
+  --color-card-foreground:    var(--color-ink);
+  --color-popover:            var(--color-paper-alt);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary:            var(--color-ink);
+  --color-primary-foreground: var(--color-paper);
+  --color-secondary:          var(--color-paper-alt);
+  --color-secondary-foreground:var(--color-ink-muted);
+  --color-muted:              var(--color-paper-alt);
+  --color-muted-foreground:   var(--color-ink-muted);
+  --color-accent:             var(--color-paper-alt);
+  --color-accent-foreground:  var(--color-ink);
+  --color-destructive:        var(--color-negative);
+  --color-border:             #D6CEBC;
+  --color-input:              #D6CEBC;
+  --color-ring:               var(--color-ink);
+
+  /* Radius Scale */
+  --radius-sm:  calc(var(--radius) * 0.6);
+  --radius-md:  calc(var(--radius) * 0.8);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Light Mode Root Variables */
+:root {
+  --paper:         #F3EEE2;
+  --paper-alt:     #ECE5D4;
+  --ink:           #1A1A1A;
+  --ink-muted:     #6B6558;
+  --rule:          #1A1A1A;
+  --rule-dashed:   #C9C2AE;
+  --negative:      #C0392B;
+  --positive:      #2E7D46;
+  --accent-blue:   #4C6FE7;
+  --accent-purple: #8B5CF6;
+  --accent-orange: #E08E45;
+  --radius:        0.125rem;
+}
+
+/* Dark Mode */
+.dark {
+  --paper:         #1C1915;
+  --paper-alt:     #242018;
+  --ink:           #EDE8DC;
+  --ink-muted:     #9B9385;
+  --rule:          #EDE8DC;
+  --rule-dashed:   #3D3830;
+  --negative:      #E05C4B;
+  --positive:      #4CAF72;
+  --accent-blue:   #6B8FF5;
+  --accent-purple: #A78BFA;
+  --accent-orange: #F0A860;
+  --radius:        0.125rem;
+}
+
+/* Base Styles */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight text-ink;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--paper-alt);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--rule-dashed);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-muted);
+  }
+}
+
+/* Utility Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulseSub 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulseSub {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+  }
+
+  /* Hide scrollbar while preserving scroll functionality */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
